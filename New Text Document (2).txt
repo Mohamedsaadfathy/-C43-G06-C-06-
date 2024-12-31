@@ -1,0 +1,720 @@
+1  Explain the difference between passing (Value type parameters) by value and by reference then write a suitable c# example.
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int value = 10;
+
+        Console.WriteLine("Before PassByValue: " + value);
+        PassByValue(value);
+        Console.WriteLine("After PassByValue: " + value);
+
+        Console.WriteLine("\nBefore PassByReference: " + value);
+        PassByReference(ref value);
+        Console.WriteLine("After PassByReference: " + value);
+    }
+
+    static void PassByValue(int num)
+    {
+        num += 10; // This changes the copy, not the original variable
+        Console.WriteLine("Inside PassByValue: " + num);
+    }
+
+    static void PassByReference(ref int num)
+    {
+        num += 10; // This changes the original variable
+        Console.WriteLine("Inside PassByReference: " + num);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2  Write a program in C# Sharp to create a function to calculate the sum of the individual digits of a given number.
+        Output should be like 
+        Enter a number: 25                                                                                            
+        The sum of the digits of the number 25 is: 7
+
+
+        using System;
+
+class Program
+{
+    static int SumOfDigits(int number)
+    {
+        int sum = 0;
+        
+        while (number != 0)
+        {
+            sum += number % 10; // Get the last digit
+            number /= 10;       // Remove the last digit
+        }
+
+        return sum;
+    }
+
+    static void Main()
+    {
+        Console.Write("Enter a number: ");
+        
+        string input = Console.ReadLine();
+        
+        if (int.TryParse(input, out int number))
+        {
+            if (number < 0)
+            {
+                number = Math.Abs(number);
+            }
+            
+            int result = SumOfDigits(number);
+            
+            Console.WriteLine($"The sum of the digits of the number {number} is: {result}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid input! Please enter a valid integer.");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create a function named MinMaxArray, to return the minimum and maximum values stored in an array, using reference parameters
+
+
+using System;
+
+class Program
+{
+    static bool IsPrime(int number)
+    {
+        if (number < 2)
+        {
+            return false;
+        }
+
+        for (int i = 2; i <= Math.Sqrt(number); i++)
+        {
+            if (number % i == 0)
+            {
+                return false; 
+            }
+        }
+
+        return true; 
+    }
+
+    static void Main()
+    {
+        Console.Write("Enter a number: ");
+        
+        string input = Console.ReadLine();
+        
+        if (int.TryParse(input, out int number))
+        {
+            bool result = IsPrime(number);
+            
+            if (result)
+            {
+                Console.WriteLine($"The number {number} is a prime number.");
+            }
+            else
+            {
+                Console.WriteLine($"The number {number} is not a prime number.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid input! Please enter a valid integer.");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create an iterative (non-recursive) function to calculate the factorial of the number specified as parameter
+
+using System;
+
+class Program
+{
+    static long Factorial(int number)
+    {
+        if (number == 0 || number == 1)
+        {
+            return 1;
+        }
+
+        long result = 1;
+
+        for (int i = 2; i <= number; i++)
+        {
+            result *= i;
+        }
+
+        return result;
+    }
+
+    static void Main()
+    {
+        Console.Write("Enter a number to calculate its factorial: ");
+        
+        string input = Console.ReadLine();
+
+        if (int.TryParse(input, out int number) && number >= 0)
+        {
+            long factorial = Factorial(number);
+
+            Console.WriteLine($"The factorial of {number} is: {factorial}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid input! Please enter a non-negative integer.");
+        }
+    }
+}
+
+
+
+
+
+
+
+-Explain the difference between passing (Reference type parameters) by value and by reference then write a suitable c# example.
+
+    #region 1-Passing By Value
+    static void Func01(int[] arr)
+    {
+        if (arr == null)
+        {
+            return;
+        }
+
+     arr[0] = 20;
+        int[] arr01 = new int [] { 0, 2, 3, 4, 5 };
+
+        Console.WriteLine(arr[0]);
+    }
+    #endregion
+
+    #region 2-Passing By Reference
+    static void Func02(ref int[] arr)
+    {
+        if (arr == null)
+        {
+            return;
+        }
+
+      arr[0] = 20;
+
+        int[] arr01 = new int[] { 0, 2, 3, 4, 5 };
+
+        Console.WriteLine(arr01[0]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create a function named MinMaxArray, to return the minimum and maximum 
+values stored in an array, using reference parameters
+
+
+using System;
+
+class Program
+{
+    static void MinMaxArray(int[] array, ref int min, ref int max)
+    {
+        min = array[0];
+        max = array[0];
+
+        foreach (int value in array)
+        {
+            if (value < min)
+            {
+                min = value;
+            }
+            if (value > max)
+            {
+                max = value;
+            }
+        }
+    }
+
+    static void Main()
+    {
+        int[] numbers = { 34, 7, 23, -12, 56, 5, 89 };
+
+        int min = 0, max = 0;
+
+        MinMaxArray(numbers, ref min, ref max);
+
+        Console.WriteLine("Array: " + string.Join(", ", numbers));
+        Console.WriteLine($"Minimum value: {min}");
+        Console.WriteLine($"Maximum value: {max}");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Write a c# Function that accept 4 parameters from user and return result of summation and subtracting of two numbers
+
+
+using System;
+
+class Program
+{
+    static (int sum, int difference) Calculate(int num1, int num2, int num3, int num4)
+    {
+        int sum = num1 + num2;            
+        int difference = num3 - num4;    
+
+        return (sum, difference);        
+    }
+
+    static void Main()
+    {
+        Console.Write("Enter the first number: ");
+        int num1 = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the second number: ");
+        int num2 = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the third number: ");
+        int num3 = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the fourth number: ");
+        int num4 = int.Parse(Console.ReadLine());
+
+        (int sum, int difference) = Calculate(num1, num2, num3, num4);
+
+        Console.WriteLine($"The summation of {num1} and {num2} is: {sum}");
+        Console.WriteLine($"The subtraction of {num3} and {num4} is: {difference}");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create a function named "ChangeChar" to modify a letter in a certain position (0 based) of a string, replacing it with a different letter
+
+using System;
+
+class Program
+{
+    static string ChangeChar(string input, int position, char newChar)
+    {
+        if (position < 0 || position >= input.Length)
+        {
+            throw new ArgumentOutOfRangeException(nameof(position), "Position is out of range.");
+        }
+
+        char[] charArray = input.ToCharArray();
+
+        charArray[position] = newChar;
+
+        return new string(charArray);
+    }
+
+    static void Main()
+    {
+        Console.Write("Enter a string: ");
+        string input = Console.ReadLine();
+
+        Console.Write("Enter the position to modify (0-based): ");
+        if (!int.TryParse(Console.ReadLine(), out int position))
+        {
+            Console.WriteLine("Invalid position input. Please enter a valid integer.");
+            return;
+        }
+
+        Console.Write("Enter the new character: ");
+        char newChar = Console.ReadKey().KeyChar;
+        Console.WriteLine();
+
+        try
+        {
+            string result = ChangeChar(input, position, newChar);
+
+            Console.WriteLine($"Modified string: {result}");
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+                                                                    
+                             
+
+
+
+
+                             
+                             
+                             
+                             
+                             
+                                                                    Part 2
+
+
+
+Create an enum called "WeekDays" with the days of the week (Monday to Sunday) as its members. Then,
+write a C# program that prints out all the days of the week using this enum.
+
+
+
+
+using System;
+
+class Program
+{
+    enum WeekDays
+    {
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday
+    }
+
+    static void Main()
+    {
+        Console.WriteLine("Days of the week:");
+
+        foreach (WeekDays day in Enum.GetValues(typeof(WeekDays)))
+        {
+            Console.WriteLine(day);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create an enum called "Season" with the four seasons (Spring, Summer, Autumn, Winter) as its members. 
+Write a C# program that takes a season name as input from the user and displays the corresponding month range for that season. 
+Note range for seasons 
+( spring march to may , summer june to august , autumn September to November , winter December to February)
+
+
+using System;
+
+class Program
+{
+    enum Season
+    {
+        Spring,
+        Summer,
+        Autumn,
+        Winter
+    }
+
+    static string GetSeasonMonthRange(Season season)
+    {
+        switch (season)
+        {
+            case Season.Spring:
+                return "March to May";
+            case Season.Summer:
+                return "June to August";
+            case Season.Autumn:
+                return "September to November";
+            case Season.Winter:
+                return "December to February";
+            default:
+                return "Unknown season";
+        }
+    }
+
+    static void Main()
+    {
+        Console.Write("Enter a season (Spring, Summer, Autumn, Winter): ");
+        string userInput = Console.ReadLine();
+
+        if (Enum.TryParse(userInput, true, out Season season))
+        {
+            string monthRange = GetSeasonMonthRange(season);
+
+            Console.WriteLine($"{season} is from {monthRange}.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid season name. Please enter one of the following: Spring, Summer, Autumn, Winter.");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    4- Assign the following Permissions (Read, write, Delete, Execute) in a form of Enum.
+Create Variable from previous Enum to Add and Remove Permission from variable,
+check if specific Permission is existed inside variable
+
+
+
+using System;
+
+class Program
+{
+    [Flags]
+    enum Permissions
+    {
+        None = 0,
+        Read = 1,
+        Write = 2,
+        Delete = 4,
+        Execute = 8
+    }
+
+    static void Main()
+    {
+        Permissions userPermissions = Permissions.None;
+
+        userPermissions |= Permissions.Read;    // Add Read permission
+        userPermissions |= Permissions.Write;   // Add Write permission
+
+        userPermissions &= ~Permissions.Write;  // Remove Write permission
+
+        Console.WriteLine("User Permissions:");
+
+        if ((userPermissions & Permissions.Read) == Permissions.Read)
+            Console.WriteLine("Read Permission: Granted");
+
+        if ((userPermissions & Permissions.Write) == Permissions.Write)
+            Console.WriteLine("Write Permission: Granted");
+        else
+            Console.WriteLine("Write Permission: Denied");
+
+        if ((userPermissions & Permissions.Delete) == Permissions.Delete)
+            Console.WriteLine("Delete Permission: Granted");
+        else
+            Console.WriteLine("Delete Permission: Denied");
+
+        if ((userPermissions & Permissions.Execute) == Permissions.Execute)
+            Console.WriteLine("Execute Permission: Granted");
+        else
+            Console.WriteLine("Execute Permission: Denied");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. Create an enum called "Colors" with the basic colors (Red, Green, Blue) as its members. 
+Write a C# program that takes a color name as input from the user and displays a
+message indicating whether the input color is a primary color or not.
+
+
+
+
+using System;
+
+class Program
+{
+    enum Colors
+    {
+        Red,
+        Green,
+        Blue
+    }
+
+    static bool IsPrimaryColor(Colors color)
+    {
+        return color == Colors.Red || color == Colors.Green || color == Colors.Blue;
+    }
+
+    static void Main()
+    {
+        Console.Write("Enter a color name (Red, Green, Blue): ");
+        string userInput = Console.ReadLine();
+
+        if (Enum.TryParse(userInput, true, out Colors color))
+        {
+            if (IsPrimaryColor(color))
+            {
+                Console.WriteLine($"{color} is a primary color.");
+            }
+            else
+            {
+                Console.WriteLine($"{color} is not a primary color.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid color name. Please enter Red, Green, or Blue.");
+        }
+    }
+}
